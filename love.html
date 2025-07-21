@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tum Mere Ho</title>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Quicksand:wght@500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Quicksand', sans-serif;
+      text-align: center;
+      background-color: #fff0f5;
+      transition: background-color 1s ease;
+    }
+
+    .abc {
+      font-family: 'Caveat', cursive;
+      font-size: 32px;
+      color: #c0396e;
+      margin-top: 20px;
+      text-shadow: 2px 2px 5px rgba(255, 130, 160, 0.3);
+    }
+
+    .img-box {
+      margin-top: 15px;
+    }
+
+    .img-box img {
+      width: 180px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(255, 192, 203, 0.4);
+      transition: transform 0.4s ease;
+    }
+
+    .img-box img:hover {
+      transform: scale(1.05);
+    }
+
+    .xyz {
+      background-color: #ffe4ec;
+      padding: 20px;
+      margin: 20px auto;
+      width: 310px;
+      border-radius: 18px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.08);
+      transition: background-color 1s ease;
+    }
+
+    .pqr {
+      font-size: 20px;
+      color: #444;
+      margin: 14px 0;
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fadeUp 0.6s ease;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .btn1 {
+      border: none;
+      padding: 12px 35px;
+      border-radius: 30px;
+      font-size: 16px;
+      margin-top: 15px;
+      cursor: pointer;
+      background-color: #ff4f84;
+      color: white;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(255, 105, 135, 0.4);
+      transition: all 0.3s ease;
+      outline: none;
+    }
+
+    .btn1:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 14px rgba(255, 105, 135, 0.5);
+    }
+
+    .emoji-drop {
+      position: absolute;
+      animation: drop 1.5s ease forwards;
+      opacity: 0.9;
+    }
+
+    @keyframes drop {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-150px); opacity: 0; }
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 0.8; }
+      100% { transform: translateY(-120vh); opacity: 0; }
+    }
+
+    .float-heart {
+      position: fixed;
+      pointer-events: none;
+      animation: floatUp 6s linear forwards;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body id="mainBody">
+
+  <h1 class="abc" id="mainHead"> sweetu babyyy!! 💞</h1>
+
+  <div class="img-box">
+    <img src="hug.png" alt="hug image" />
+  </div>
+
+  <div class="xyz" id="cardBox">
+    <p class="pqr" id="msgText">Aap meri life ka sbse important part ho</p>
+    <button class="btn1" id="nextBtn" onclick="nextLine()">Love 💖</button>
+  </div>
+
+  <script>
+    var lineIndex = 0;
+
+    var messages = [
+      "I'll never stop loving you jaan..",
+      "Gussa thoda kam kiya kro I feel fear of losing you 💔",
+      "I want to grow with you forever..",
+      "I love you so muchhh and miss you even more 💗"
+    ];
+
+    var bgColors = ["#fff0f5", "#f3e8ff", "#ff6f6f", "#e3f2fd", "#fff9e6"];
+    var cardColors = ["#ffe4ec", "#f5e8ff", "#ffdada", "#f0f8ff", "#fff4e6"];
+    var btnColors = ["#ff4f84", "#a873e7", "#ff3366", "#3a8edb", "#f6ad55"];
+    var headingColors = ["#c0396e", "#843baa", "#a11236", "#2a4a75", "#d76b00"];
+
+    var emojiSets = [
+      ["💖", "💘", "💓", "💗"],
+      ["🤗", "🧸", "💞", "🫂"],
+      ["💋", "😘", "🫦", "❤️‍🔥"],
+      ["💖", "💫", "💍", "🌟"]
+    ];
+
+    var labels = ["Love 💖", "Hug 🤗", "Kiss 💋", "Muaaah 😘"];
+
+    function nextLine() {
+      let msg = document.getElementById("msgText");
+      let body = document.getElementById("mainBody");
+      let card = document.getElementById("cardBox");
+      let btn = document.getElementById("nextBtn");
+      let head = document.getElementById("mainHead");
+
+      msg.innerText = messages[lineIndex];
+      msg.classList.remove("pqr");
+      void msg.offsetWidth;
+      msg.classList.add("pqr");
+
+      body.style.backgroundColor = bgColors[lineIndex];
+      card.style.backgroundColor = cardColors[lineIndex];
+      btn.style.backgroundColor = btnColors[lineIndex];
+      head.style.color = headingColors[lineIndex];
+
+      emojiShower(emojiSets[lineIndex]);
+      floatHearts(emojiSets[lineIndex]);
+
+      lineIndex++;
+
+      if (lineIndex < labels.length) {
+        btn.innerText = labels[lineIndex];
+      } else {
+        btn.style.display = "none";
+      }
+    }
+
+    function emojiShower(set) {
+      for (let i = 0; i < 12; i++) {
+        setTimeout(() => {
+          let em = document.createElement("div");
+          em.className = "emoji-drop";
+          em.innerText = set[Math.floor(Math.random() * set.length)];
+          em.style.left = (window.innerWidth / 2 - 20 + Math.random() * 60 - 30) + "px";
+          em.style.top = (window.innerHeight / 2) + "px";
+          em.style.fontSize = (20 + Math.random() * 12) + "px";
+          document.body.appendChild(em);
+          setTimeout(() => em.remove(), 1500);
+        }, i * 100);
+      }
+    }
+
+    function floatHearts(set) {
+      for (let i = 0; i < 14; i++) {
+        setTimeout(() => {
+          let heart = document.createElement("div");
+          heart.className = "float-heart";
+          heart.innerText = set[Math.floor(Math.random() * set.length)];
+          heart.style.left = Math.random() * 100 + "vw";
+          heart.style.top = "100%";
+          heart.style.fontSize = 18 + Math.random() * 14 + "px";
+          heart.style.opacity = 0.6 + Math.random() * 0.4;
+          document.body.appendChild(heart);
+          setTimeout(() => heart.remove(), 6000);
+        }, i * 150);
+      }
+    }
+  </script>
+
+</body>
+</html>
