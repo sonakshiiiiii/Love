@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Snacks Game 🍿 – My Jaan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #fff7f0;
+      font-family: 'Caveat', cursive;
+      text-align: center;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    h1 {
+      margin: 30px 0 10px;
+      color: #c94f7c;
+      font-size: 2.6em;
+    }
+
+    .snacks-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      justify-items: center;
+      max-width: 700px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    .snack {
+      width: 140px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .snack:hover {
+      transform: scale(1.2);
+    }
+
+    .snack .emoji {
+      font-size: 4.5rem;
+    }
+
+    .snack p {
+      margin-top: 10px;
+      font-size: 1.5em;
+      color: #4a2a2a;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .snack.clicked p {
+      opacity: 1;
+    }
+
+    #final {
+      display: none;
+      margin-top: 30px;
+    }
+
+    #final p {
+      font-size: 1.7em;
+      color: #aa336a;
+    }
+
+    #final button {
+      margin-top: 15px;
+      padding: 10px 25px;
+      font-size: 1.5em;
+      background: #ffdce5;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-family: 'Caveat', cursive;
+      color: #4a2a2a;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+    }
+
+    #final button:hover {
+      transform: scale(1.05);
+    }
+
+    /* Floating Emojis */
+    .emoji-bg {
+      position: absolute;
+      font-size: 2.5rem;
+      opacity: 0.12;
+      animation: float 10s infinite ease-in-out;
+    }
+
+    .e1 { left: 10%; top: 100%; animation-delay: 0s; }
+    .e2 { left: 30%; top: 100%; animation-delay: 2s; }
+    .e3 { left: 50%; top: 100%; animation-delay: 4s; }
+    .e4 { left: 70%; top: 100%; animation-delay: 1s; }
+    .e5 { left: 90%; top: 100%; animation-delay: 3s; }
+
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 0.2; }
+      50% { opacity: 0.4; }
+      100% { transform: translateY(-120vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Choose a Snack 🍿💋</h1>
+
+  <div class="snacks-container">
+    <div class="snack" data-msg="Aap jaise spicy taco... duniya mein nahi milta 🌮">
+      <div class="emoji">🌮</div>
+      <p>...</p>
+    </div>
+
+    <div class="snack" data-msg="Aap fries ho... sabse crispy aur sabse yummy 🍟">
+      <div class="emoji">🍟</div>
+      <p>...</p>
+    </div>
+
+    <div class="snack" data-msg="Aap meri cheese burst zindagi ho 🧀">
+      <div class="emoji">🧀</div>
+      <p>...</p>
+    </div>
+
+    <div class="snack" data-msg="Aap meri sweet & soft pastry ho 🍰">
+      <div class="emoji">🍰</div>
+      <p>...</p>
+    </div>
+
+    <div class="snack" data-msg="Main har roll ke andar bas aapko chhupake rakhna chahti hoon 🌯">
+      <div class="emoji">🌯</div>
+      <p>...</p>
+    </div>
+
+    <div class="snack" data-msg="Aap hi mera sabse yummy combo ho 💋">
+      <div class="emoji">🧁</div>
+      <p>...</p>
+    </div>
+  </div>
+
+  <div id="final">
+    <p>Mujhe snacks nahi chahiye… Mujhe sirf AAP chahiye😚💗</p>
+    <button onclick="location.href='page9.html'">Aage chalein meri jaanu? 💞</button>
+  </div>
+
+  <!-- Floating Emojis -->
+  <div class="emoji-bg e1">🍩</div>
+  <div class="emoji-bg e2">🍿</div>
+  <div class="emoji-bg e3">🧁</div>
+  <div class="emoji-bg e4">🍬</div>
+  <div class="emoji-bg e5">🌟</div>
+
+  <script>
+    let clickedCount = 0;
+    const snacks = document.querySelectorAll('.snack');
+
+    snacks.forEach(snack => {
+      snack.addEventListener('click', () => {
+        if (!snack.classList.contains('clicked')) {
+          snack.classList.add('clicked');
+          snack.querySelector('p').innerText = snack.dataset.msg;
+          clickedCount++;
+
+          if (clickedCount === snacks.length) {
+            document.getElementById('final').style.display = 'block';
+          }
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
